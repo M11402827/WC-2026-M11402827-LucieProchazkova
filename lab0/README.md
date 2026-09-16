@@ -62,6 +62,28 @@ After this packet, the TCP connection is established.
 
 ![ACK, packet numer 196](images/syn_ack.png)
 
+## 2. DNS Packet Analysis
+
+### 2.1 What are the IP address and port number of the DNS server?
+
+- DNS server IP address: `140.118.31.99`
+- DNS server port number: `53`
+
+![DNS Packet](images/dns.png)
+
+### 2.2 What is the domain name in the DNS query?
+
+taipeitimes.com
+
+### 2.3 Which protocols does this DNS packet use?
+
+Layer 2: Link Layer: Ethernet II
+Layer 3: Network Layer: Internet Protocol Version 4 IPv4
+Layer 4: Transport Layer: User Datagram Protocol UDP
+Layer 5: Application Layer: Domain Name System DNS
+
+
+
 
 
 
