@@ -77,10 +77,47 @@ taipeitimes.com
 
 ### 2.3 Which protocols does this DNS packet use?
 
-Layer 2: Link Layer: Ethernet II
-Layer 3: Network Layer: Internet Protocol Version 4 IPv4
-Layer 4: Transport Layer: User Datagram Protocol UDP
-Layer 5: Application Layer: Domain Name System DNS
+- Layer 2: Link Layer: Ethernet II
+- Layer 3: Network Layer: Internet Protocol Version 4 IPv4
+- Layer 4: Transport Layer: User Datagram Protocol UDP
+- Layer 5: Application Layer: Domain Name System DNS
+
+## 3. Access an HTTP page
+
+### 3.1 Which HTTP page did you access?
+
+I accessed: http://www.gzxyzn.com/Article/bjrk2/1644.html
+
+### 3.2 What are the IP address and port number of the server hosting the page?
+
+- Server IP address: `61.183.8.129`
+- Server port number: `80`
+
+The HTTP request was sent from my PC (`10.119.3.237`) to the server
+`61.183.8.129` using TCP port `80`.
+
+![HTTP page](images/http.png)
+
+### 3.3 What is the HTTP request method?
+
+The HTTP request method is: `GET`
+
+Packet `222` contains: `GET /Article/bjrk2/1644.html HTTP/1.1`
+
+The GET method is used by the client to request a resource from the
+web server.
+
+![HTTP Request](images/http-request.png)
+
+### 3.4 What is the HTTP response status code, and what does it mean?
+
+The HTTP response status code is: `200 OK`
+
+Packet `230` contains: `HTTP/1.1 200 OK`
+
+The `200 OK` status code means that the request was successfully done.
+
+![HTTP Response](images/http-response.png)
 
 
 
