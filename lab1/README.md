@@ -99,6 +99,32 @@ Correctly explain N1, N2, and N3.
 
 ## 7. Connect RRC Signaling to NGAP and NAS
 
+The UE exchanges NAS signaling with the AMF through the gNB. On the radio side, the NAS message is carried by RRC. The gNB then forwards it to the AMF through NGAP.
+
+![Registration request](images/reqistration_request.png)
+
+-RRCSetupComplete
+
+`108` contains an `RRCSetupComplete` message sent from the UE to the gNB and inside `RRCSetupComplete` messsage, the `dedicatedNAS-Message` to `Registration Request`.
+This show that the UE sends its `NAS Registration Request` to the gNB using RRC signaling.
+
+![NAS-PDU registration request](images/request2.png)
+
+
+### RRC-to-NGAP/NAS Mapping
+
+| Stage | Protocol message | Sender to receiver | Encapsulated information |
+|---|---|---|---|
+| Radio side | `RRCSetupComplete` | UE to gNB | NAS `Registration Request` in `dedicatedNAS-Message` |
+| Core side | `NGAP InitialUEMessage` | gNB to AMF | NAS `Registration Request` in `NAS-PDU` |
+
+Answer:
+
+- What is the role of the gNB when it transports NAS messages? gNB is between UE and AMF so it recievs the NAS signal from the UE thnaks to RRC message and takes it to AMF. 
+- What is the difference between RRC and NAS signaling? RRC singal is in the UE and gNB path to make the connection.
+- Is the Registration Request delivered directly from the UE to the AMF? Explain the protocol path. no,, it is not. The UE send the `Registration Request` inside
+`RRCSetupComplete` to the gNB and the gNB then sends it to AF. `UE → RRC → gNB → NGAP → AMF`
+- Which message confirms that Registration has completed successfully? `Registration Complete` message 
 
 
 
