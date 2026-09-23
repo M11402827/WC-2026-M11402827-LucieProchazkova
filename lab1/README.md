@@ -1,22 +1,21 @@
 # Wireless Communications Lab0
 ###### tags: `Wireless Communications`
 
-## :notebook_with_decorative_cover: Lab 1: Analyzing UE–gNB Connectivity in an OAI 5G SA Network(Student)
+## :notebook_with_decorative_cover: Lab 1: Analyzing UE–gNB Connectivity in an OAI 5G SA Network
 
 ## 1. Lab Overview
 
 After completing this lab, you should be able to:
 
-Identify the UE, gNB, AMF, UPF, and Data Network.
-Explain the purpose of RRCSetupRequest, RRCSetup, and RRCSetupComplete.
-Explain how a NAS message is transported from the UE to the AMF through the gNB.
-Identify the main 5G Registration messages.
-Verify that the UE receives an IP address and exchanges user-plane traffic.
+- Identify the UE, gNB, AMF, UPF, and Data Network.
+- Explain the purpose of RRCSetupRequest, RRCSetup, and RRCSetupComplete.
+- Explain how a NAS message is transported from the UE to the AMF through the gNB.
+- Identify the main 5G Registration messages.
+- Verify that the UE receives an IP address and exchanges user-plane traffic.
 
 ## 2. Required Files
 
-OAI-5G-Wireshark-Profile.zip
-oai-5g-combined.pcapng
+OAI-5G-Wireshark-Profile.zip and oai-5g-combined.pcapng
 
 ## 3. Install the OAI-5G Wireshark Profile
 
@@ -33,7 +32,7 @@ oai-5g-combined.pcapng
 
 These are the 5G NR Radio Resource Control messages.
 
-Checkpoint 1: Wireshark Setup
+- Checkpoint 1: Wireshark Setup
 
 ![Select profiles](images/profiles.png)
 
@@ -45,9 +44,9 @@ Checkpoint 1: Wireshark Setup
 
 Applied these filters individually: ngap, gtp, icmp
 
-Checkpoint 2: Basic Architecture
-Correctly identify the five components and their IP addresses.
-Correctly explain N1, N2, and N3.
+- Checkpoint 2: Basic Architecture:
+- Correctly identify the five components and their IP addresses.
+- Correctly explain N1, N2, and N3.
 
 ### Basic 5G SA Architecture
 
@@ -156,28 +155,29 @@ Packet `490` is between gNB (`192.168.70.129`) and UPF (`192.168.70.134`)
 
 
 - What IPv4 address was assigned to the UE?`10.0.0.2`
-- How many ICMP Echo Request/Reply pairs are present? `[COUNT]` there are seq from 1 to 10 request and replies
+- How many ICMP Echo Request/Reply pairs are present? there are seq from 1 to 10 request and replies
 - What does the successful Echo Reply prove about the UE connection? ot proves that the UE has working user-plane connect. The UE can send IP traffic through the gNB and UPF to the Data Network and receive data .
 
 ## 9. Final UE Connection Sequence
 
 Create one sequence diagram containing:
 
-UE
-gNB
-AMF
-UPF
-Data Network
+UE, 
+gNB, 
+AMF, 
+UPF,
+Data Network, 
+
 Include at least:
 
-RRCSetupRequest
-RRCSetup
-RRCSetupComplete with Registration Request
-NGAP InitialUEMessage
-Authentication
-Security Mode
-Registration Accept and Complete
-PDU Session establishment
+RRCSetupRequest, 
+RRCSetup, 
+RRCSetupComplete with Registration Request, 
+NGAP InitialUEMessage, 
+Authentication, 
+Security Mode, 
+Registration Accept and Complete, 
+PDU Session establishment, 
 GTP-U ping
 
 ![Sequence diagram](images/wireless.png)
