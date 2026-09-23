@@ -101,9 +101,9 @@ Correctly explain N1, N2, and N3.
 
 The UE exchanges NAS signaling with the AMF through the gNB. On the radio side, the NAS message is carried by RRC. The gNB then forwards it to the AMF through NGAP.
 
-![Registration request](images/reqistration_request.png)
+![Registration request](images/registration_request.png)
 
--RRCSetupComplete
+- RRCSetupComplete
 
 `108` contains an `RRCSetupComplete` message sent from the UE to the gNB and inside `RRCSetupComplete` messsage, the `dedicatedNAS-Message` to `Registration Request`.
 This show that the UE sends its `NAS Registration Request` to the gNB using RRC signaling.
@@ -124,7 +124,37 @@ Answer:
 - What is the difference between RRC and NAS signaling? RRC singal is in the UE and gNB path to make the connection.
 - Is the Registration Request delivered directly from the UE to the AMF? Explain the protocol path. no,, it is not. The UE send the `Registration Request` inside
 `RRCSetupComplete` to the gNB and the gNB then sends it to AF. `UE → RRC → gNB → NGAP → AMF`
-- Which message confirms that Registration has completed successfully? `Registration Complete` message 
+- Which message confirms that Registration has completed successfully? `Registration Complete` message
+
+## 8. Verify the UE IP Address and User-Plane Traffic
+
+Find the PDU Session Establishment Accept and record the UE address:
+
+- With filter nas-5gs || ngap
+
+| Field | Observed value |
+|---|---|
+| UE IPv4 address | `10.0.0.2` |
+
+![PDU](images/PDU.png)
+
+- With filter gtp || icmp
+
+- Echo request: 
+
+![GTP](images/gtp2.png)
+
+
+- Echo Reply: 
+
+![GTP](images/echo.png)
+
+
+- What IPv4 address was assigned to the UE?`10.0.0.2`
+- How many ICMP Echo Request/Reply pairs are present? `[COUNT]`
+- What does the successful Echo Reply prove about the UE connection? ot proves that the UE has working user-plane connect. The UE can send IP traffic through the gNB and UPF to the Data Network and receive data .
+
+
 
 
 
