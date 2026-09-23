@@ -9,12 +9,12 @@
 
 ## :notebook_with_decorative_cover: Assignment
 
-**LAB0 + LAB1: Analyzing UE–gNB Connectivity in an OAI 5G SA Network **
+### LAB0 + LAB1: Basic wireshark operation and capture + Analyzing UE–gNB Connectivity in an OAI 5G SA Network
 
 - Assignment Information: Lab1
 - Deadline : 12:00, Sep. 28
 - Goal: In this lab, you will use Wireshark to analyze how a UE establishes an RRC connection with an OAI gNB and then registers with the 5G Core.
-- Delivery:  [Link text](https://example.com)
+- Delivery:  [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab0-1)
 
 <!-- 
 **LAB2 : gNB TDD Traffic Analysis
