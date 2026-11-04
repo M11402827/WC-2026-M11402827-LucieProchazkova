@@ -147,9 +147,42 @@ So the Scenario C has higher throughput, higher packet loss and higher jitter. T
 | `nrofDownlinkSymbols` | 6 | 6 |
 | `nrofUplinkSlots` | 2 | 2 |
 | `nrofUplinkSymbols` | 4 | 4 |
-| `pattern2` present? | - | - |
+| `pattern2` present? | NO | NO |
 
 4.4 Draw the TDD Time Allocation
+
+### DL-heavy TDD Diagram
+
+**0–5 ms**
+
+| Time (ms) | 0–0.5 | 0.5–1.0 | 1.0–1.5 | 1.5–2.0 | 2.0–2.5 | 2.5–3.0 | 3.0–3.5 | 3.5–4.0 | 4.0–4.5 | 4.5–5.0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Slot | D | D | D | D | D | D | D | Mixed | U | U |
+
+**Mixed Slot 7**
+
+| Symbol | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Type | D | D | D | D | D | D | F | F | F | F | U | U | U | U |
+
+D = Downlink, U = Uplink, F = Flexible.
+
+
+### Balanced TDD Diagram
+
+**0–5 ms**
+
+| Time (ms) | 0–0.5 | 0.5–1.0 | 1.0–1.5 | 1.5–2.0 | 2.0–2.5 | 2.5–3.0 | 3.0–3.5 | 3.5–4.0 | 4.0–4.5 | 4.5–5.0 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Slot | D | D | Mixed | U | U | D | D | Mixed | U | U |
+
+**Mixed Slot**
+
+| Symbol | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| Type | D | D | D | D | D | D | F | F | F | F | U | U | U | U |
+
+D = Downlink, U = Uplink, F = Flexible.
 
 | TDD setting | Repeating duration (ms) | Total reference slots | DL symbols | UL symbols | Flexible symbols | Configured UL symbol share (%) |
 |---|---:|---:|---:|---:|---:|---:|
@@ -324,6 +357,4 @@ Reduce the UDP bitrate in the scenario C a litttle bit, while keeping the same b
 
 ### 8. What can the configuration captures tell you that the iperf3 JSON cannot? Why are separately recorded configuration captures not direct proof of the configuration during an earlier test?
 
-The configuration captures reads the broadcast SIB1 TDD parameters which is the transmission periodicity, number of DL and UL symbols and slots. The iperf3 JSON is only for reporting throughput, packet loss, and jitter.
-
-
+The configuration captures reads the broadcast SIB1 TDD parameters which is the transmission periodicity, number of DL and UL symbols and slots. The iperf3 JSON is only for reporting throughput, packet loss, and jitter. The separately recorded configuration captures were recorded separately from the iperf3 tests, so they cannot prove that exactly the same configuration was broadcast before.
