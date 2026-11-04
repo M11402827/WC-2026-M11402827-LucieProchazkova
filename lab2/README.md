@@ -151,38 +151,14 @@ So the Scenario C has higher throughput, higher packet loss and higher jitter. T
 
 4.4 Draw the TDD Time Allocation
 
-### DL-heavy TDD Diagram
+![TDD Time Allocation](images/TDD.png)<br>
 
-**0–5 ms**
+*Figure: DL-heavy,D = Downlink, U = Uplink, F = Flexible*
 
-| Time (ms) | 0–0.5 | 0.5–1.0 | 1.0–1.5 | 1.5–2.0 | 2.0–2.5 | 2.5–3.0 | 3.0–3.5 | 3.5–4.0 | 4.0–4.5 | 4.5–5.0 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Slot | D | D | D | D | D | D | D | Mixed | U | U |
+![TDD Time Allocation](images/TDD.png)<br>
 
-**Mixed Slot 7**
+*Figure: Balanced, D = Downlink, U = Uplink, F = Flexible*
 
-| Symbol | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Type | D | D | D | D | D | D | F | F | F | F | U | U | U | U |
-
-D = Downlink, U = Uplink, F = Flexible.
-
-
-### Balanced TDD Diagram
-
-**0–5 ms**
-
-| Time (ms) | 0–0.5 | 0.5–1.0 | 1.0–1.5 | 1.5–2.0 | 2.0–2.5 | 2.5–3.0 | 3.0–3.5 | 3.5–4.0 | 4.0–4.5 | 4.5–5.0 |
-|---|---|---|---|---|---|---|---|---|---|---|
-| Slot | D | D | Mixed | U | U | D | D | Mixed | U | U |
-
-**Mixed Slot**
-
-| Symbol | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| Type | D | D | D | D | D | D | F | F | F | F | U | U | U | U |
-
-D = Downlink, U = Uplink, F = Flexible.
 
 | TDD setting | Repeating duration (ms) | Total reference slots | DL symbols | UL symbols | Flexible symbols | Configured UL symbol share (%) |
 |---|---:|---:|---:|---:|---:|---:|
