@@ -37,9 +37,9 @@ Used json files:
 
 The traffic direction shown in the JSON match the scenario description.
 
-- Scenario A has `"reverse": 1`, which means downlink.
-- Scenario B has `"reverse": 0`, which means uplink.
-- Scenario C has `"reverse": 0`, which means uplink.
+- Scenario A has reverse: 1, which is downlink.
+- Scenario B has reverse: 0, which is uplink.
+- Scenario C has reverse: 0, which is uplink.
 
 
 ![Scenario A](images/profile1.png)<br>
@@ -49,7 +49,6 @@ The traffic direction shown in the JSON match the scenario description.
 ![Scenario B](images/profile2.png)<br>
 
 *Figure: Scenario B*
-
 
 ![Scenario C](images/profile3.png)<br>
 
@@ -68,19 +67,39 @@ Conversion of the values:
 | B | Uplink | 109.12 |
 | C | Uplink | 124.42 |
 
-![Scenario A](images/bits1.png)
-![Scenario B](images/bits2.png)
-![Scenario C](images/bits3.png)
+![Scenario A](images/bits1.png)<br>
+
+*Figure: Scenario A*
+
+![Scenario B](images/bits2.png)<br>
+
+*Figure: Scenario B*
+
+![Scenario C](images/bits3.png)<br>
+
+*Figure: Scenario C*
 
 ### Questions
 
-1. The downlink throguhput in Scenario A is approximately **90.65 Mbps**.
-2. The uplink throughput in Scenario B is approximately **109.12 Mbps**.
-3. The uplink throughput is higher in **Scenario C**.
-4. Imporovement from B to C:
-   `(124.42 - 109.12) / 109.12 × 100 ≈ 14.02%`
+1. What is the downlink throughput in Scenario A? 
 
-   Therefore, Scenario C improves uplink throughput by approximately **14.02%** compared with Scenario B.
+The downlink throguhput in Scenario A is 90.65 Mbps.
+
+2. What is the uplink throughput in Scenario B?
+
+The uplink throughput in Scenario B is 109.12 Mbps.
+
+3. Is the uplink throughput higher in B or C?
+
+Uplink throughput is higher in Scenario C.
+
+4. By approximately what percentage does C improve over B?
+
+Imporove from B to C:
+
+   `(124.42 - 109.12) / 109.12 × 100 = 14.02%`
+
+   Scenario C imporoves uplink throughput at 14.02% than in Scenario B.
 
 ## 5. Task 3 — Check the Trade-off
 
@@ -91,16 +110,27 @@ Conversion of the values:
 
 ### Questions
 
-1. Yes. Scenario C has higher uplink throughput than Scenario B.
-2. No. Scenario C has higher packet loss than Scenario B. Packet loss increases from approximately **0.236%** to **2.134%**.
+1. Does C have higher uplink throughput than B? 
+
+Yes, it does, the scenario C has higher uplink throughput than B.
+
+2. Does C have lower packet loss than B?
+
+No, it does not, the scenario C has higher packet loss than B. Packet loss increases from 0.236 % to 2.134 %.
 3. Compared with Scenario B, Scenario C has higher throughput, higher packet loss and higher jitter. This suggests the balanced TDD configuration makes better uplink throughput, but makes an increased packet loss and jitter.
 
 ## 6. Task 4 — Read SIB1 and Draw the TDD Configuration
 
 4.2 Enable MAC-NR Decoding and Find SIB1
 
-![DL-heavy](images/config1.png)
-![Balanced](images/config2.png)
+![DL-heavy](images/config1.png)<br>
+
+*Figure: DL-heavy*
+
+
+![Balanced](images/config2.png)<br>
+
+*Figure: Balanced*
 
 4.3 Record the TDD Parameters
 
@@ -203,8 +233,13 @@ However, the additional UL resources do not guarantee better performance in ever
 
 ## 8. Task 6 — Find GTP-U Information
 
-![Scenario A DL Heavy Downlink](images/scenario1.png)
-![Scenario A DL Heavy Downlink](images/scenario2.png)
+![Scenario A DL Heavy Downlink Part 1](images/scenario1.png)<br>
+
+*Figure: Scenario A - DL Heavy Downlink Part 1*
+
+![Scenario A DL Heavy Downlink Part 2](images/scenario2.png)<br>
+
+*Figure: Scenario A - DL Heavy Downlink Part 2*
 
 ## 8. Task 6 — Find GTP-U Information
 
@@ -225,5 +260,121 @@ The outer IP addresses, `192.168.70.129` and `192.168.70.134`, identify the endp
 The inner IP addresses, `10.0.0.6` and `192.168.70.135`, belong to the original user/application packet carried inside the tunnel.
 
 The TEID is `0x00000011` (17). It identifies the GTP-U tunnel at the receiving endpoint.
+
+## 9. Task 7 — TCP Retransmissions
+
+| Scenario | Displayed TCP retransmissions |
+|---|---:|
+| A | 14 |
+| B | 12 |
+| C | 12 |
+
+### Question: Do these TCP retransmissions directly represent lost UDP performance packets?
+
+No. These retransmissions belong to TCP flows that Wireshark can decode, such as the iperf3 TCP control connection.
+
+The performance traffic in this lab is UDP, so these TCP retransmissions do not directly represent lost UDP performance packets. UDP packet loss should instead be taken from the iperf3 JSON results.
+
+![Scenario A DL Heavy Downlink](images/packetsa.png)<br>
+
+*Figure: Scenario A - DL Heavy Downlink*
+
+![Scenario B DL Heavy Uplink](images/packetsb.png)<br>
+
+*Figure: Scenario B - DL Heavy Uplink*
+
+![Scenario C Balanced Uplink](images/packetsc.png)<br>
+
+*Figure: Scenario C - Balanced Uplink*
+
+
+
+## 10. Task 8 — RTT and Packet Interval
+
+![Scenario A DL Heavy Downlink - Packet Interval](images/packetsatime.png)<br>
+
+*Figure: Scenario A - DL Heavy Downlink RTT*
+
+![Scenario B DL Heavy Uplink - Packet Interval](images/packetsbtime.png)<br>
+
+*Figure: Scenario B - DL Heavy Uplink RTT*
+
+![Scenario C Balanced Uplink - Packet Interval](images/packetsctime.png)<br>
+
+*Figure: Scenario C - Balanced Uplink RTT*
+
+### TCP RTT
+
+| Scenario | Packet number | Example TCP ACK RTT |
+|---|---:|---:|
+| C | 121627 | 0.315 ms |
+
+The selected packet shows an ACK RTT of **315 microseconds**, which is equal to **0.315 ms**.
+
+This RTT value belongs to the iperf3 TCP control connection, not the UDP performance traffic.
+
+### Packet Interval
+
+Packets 1892 and 1896:
+
+![Scenario A DL Heavy Downlink - Packet 1896 Interval](images/1896.png)<br>
+
+*Figure: Scenario A DL Heavy Downlink - Packet 1896 Interval*
+
+### Packet Interval
+
+| Scenario | Display filter | Packet numbers | Time interval |
+|---|---|---|---|
+| A | `udp && ip.src == 192.168.70.135 && ip.dst == 10.0.0.6` | 1892 → 1896 | 1.045 ms |
+
+The packet interval was measured from packet 1896 using the Wireshark field `Time delta from previous displayed frame`.
+
+The measured interval between the two consecutive displayed UDP data packets is **1.045 ms**.
+
+## 11. Final Guestions
+
+### 1. Does Scenario A use a TDD setting that matches its traffic direction?
+
+Yes, because the ccenario A uses the DL-heavy TDD configuration and the traffic direction is downlink.
+
+### 2. Why is Scenario B expected to have limited uplink resources?
+
+Because the scenario B uses the DL-heavy configuration and it has only 32 UL symbols in 5 ms, so less resources are configured for uplink.
+
+### 3. How much does uplink throughput change from B to C?
+
+Scenario B achieves approximately **109.12 Mbps**, while Scenario C achieves approximately **124.42 Mbps**.
+
+This is an increase of about **15.30 Mbps**, or approximately **14.02%**.
+
+### 4. What negative result, if any, is visible in C?
+
+Scenario C has higher packet loss and slightly higher jitter than Scenario B.
+
+Packet loss increases from approximately **0.236%** in Scenario B to **2.134%** in Scenario C, while jitter increases from about **0.116 ms** to **0.162 ms**.
+
+### 5. Why can increasing UL resources improve uplink throughput?
+
+Increasing UL resources gives the UE more opportunities to transmit uplink data.
+
+In this lab, the Balanced configuration provides **64 UL symbols in 5 ms**, compared with only **32 UL symbols** in the DL-heavy configuration, which helps support higher uplink throughput.
+
+### 6. Is adding more UL resources always the best solution?
+
+No. More UL resources can improve uplink throughput, but other performance metrics may become worse.
+
+In this lab, Scenario C has higher throughput than Scenario B, but its packet loss also increases from approximately **0.236%** to **2.134%**, so there is a trade-off.
+
+### 7. Suggest one simple follow-up test that could improve throughput without producing too much packet loss.
+
+A simple follow-up test would be to try a TDD configuration with an UL allocation between the DL-heavy and Balanced settings.
+
+The goal would be to provide more UL transmission opportunities than Scenario B while checking whether packet loss stays lower than the **2.134%** observed in Scenario C.
+
+### 8. What can the configuration captures tell you that the iperf3 JSON cannot? Why are separately recorded configuration captures not direct proof of the configuration during an earlier test?
+
+The configuration captures allow us to read the broadcast SIB1 TDD parameters, such as the transmission periodicity, number of DL and UL slots, and number of DL and UL symbols. The iperf3 JSON only reports traffic direction and performance results such as throughput, packet loss, and jitter.
+
+The configuration captures were recorded separately from the original iperf3 tests, so they are reference captures for the supplied TDD settings. Therefore, they cannot independently prove that the exact same configuration was broadcast during an earlier performance test.
 
 
