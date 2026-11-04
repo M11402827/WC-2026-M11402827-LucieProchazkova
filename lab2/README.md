@@ -308,30 +308,22 @@ The scenario B achieves 109.12 Mbps and the scenario C achieves 124.42 Mbps. Thi
 
 ### 4. What negative result, if any, is visible in C?
 
-Scenario C has higher packet loss and slightly higher jitter than Scenario B. Packet loss increases from approximately 0.236% in Scenario B to 2.134% in Scenario C, while jitter increases from about 0.116 ms to 0.162 ms.
+The scenario C has higher packet loss and higher jitter than scenario B, so the packet loss increases from 0.236% in Scenario B to 2.134% in Scenario C, while jitter increases from about 0.116 ms to 0.162 ms.
 
 ### 5. Why can increasing UL resources improve uplink throughput?
 
-Increasing UL resources gives the UE more opportunities to transmit uplink data.
-
-In this lab, the Balanced configuration provides **64 UL symbols in 5 ms**, compared with only **32 UL symbols** in the DL-heavy configuration, which helps support higher uplink throughput.
+The balanced configuration provides 64 UL symbols in 5 ms and the DL-heavy only 32 UL symbols, so it helps support higher uplink throughput.
 
 ### 6. Is adding more UL resources always the best solution?
 
-No. More UL resources can improve uplink throughput, but other performance metrics may become worse.
-
-In this lab, Scenario C has higher throughput than Scenario B, but its packet loss also increases from approximately **0.236%** to **2.134%**, so there is a trade-off.
+No, it is not, because the ccenario C has higher throughput than scenario B, but the packet loss increases from 0.236% to 2.134%.
 
 ### 7. Suggest one simple follow-up test that could improve throughput without producing too much packet loss.
 
-A simple follow-up test would be to try a TDD configuration with an UL allocation between the DL-heavy and Balanced settings.
-
-The goal would be to provide more UL transmission opportunities than Scenario B while checking whether packet loss stays lower than the **2.134%** observed in Scenario C.
+Reduce the UDP bitrate in the scenario C a litttle bit, while keeping the same balancedd TDD configuration, whcih could tel us if the higher packet loss is caused by sending data with higher bitrate. 
 
 ### 8. What can the configuration captures tell you that the iperf3 JSON cannot? Why are separately recorded configuration captures not direct proof of the configuration during an earlier test?
 
-The configuration captures allow us to read the broadcast SIB1 TDD parameters, such as the transmission periodicity, number of DL and UL slots, and number of DL and UL symbols. The iperf3 JSON only reports traffic direction and performance results such as throughput, packet loss, and jitter.
-
-The configuration captures were recorded separately from the original iperf3 tests, so they are reference captures for the supplied TDD settings. Therefore, they cannot independently prove that the exact same configuration was broadcast during an earlier performance test.
+The configuration captures reads the broadcast SIB1 TDD parameters which is the transmission periodicity, number of DL and UL symbols and slots. The iperf3 JSON is only for reporting throughput, packet loss, and jitter.
 
 
