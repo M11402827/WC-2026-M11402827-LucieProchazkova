@@ -117,7 +117,10 @@ Yes, it does, the scenario C has higher uplink throughput than B.
 2. Does C have lower packet loss than B?
 
 No, it does not, the scenario C has higher packet loss than B. Packet loss increases from 0.236 % to 2.134 %.
-3. Compared with Scenario B, Scenario C has higher throughput, higher packet loss and higher jitter. This suggests the balanced TDD configuration makes better uplink throughput, but makes an increased packet loss and jitter.
+
+3. What trade-off, if any, is visible when changing from B to C?
+
+So the Scenario C has higher throughput, higher packet loss and higher jitter. This eans that the balanced TDD makes better uplink throughput, but makes an increased packet loss and jitter.
 
 ## 6. Task 4 — Read SIB1 and Draw the TDD Configuration
 
@@ -138,8 +141,8 @@ No, it does not, the scenario C has higher packet loss than B. Packet loss incre
 |---|---|---|
 | Configuration capture filename | `tdd-dl-heavy-sib1.pcapng` | `tdd-balanced-sib1.pcapng` |
 | SIB1 packet number | 2 | 2 |
-| `referenceSubcarrierSpacing` (kHz) | 30 kHz | 30 kHz |
-| `dl-UL-TransmissionPeriodicity` (ms) | 5 ms | 2.5 ms |
+| `referenceSubcarrierSpacing` (kHz) | 30kHz | 30kHz |
+| `dl-UL-TransmissionPeriodicity` (ms) | 5ms | 2.5ms |
 | `nrofDownlinkSlots` | 7 | 2 |
 | `nrofDownlinkSymbols` | 6 | 6 |
 | `nrofUplinkSlots` | 2 | 2 |
@@ -159,9 +162,7 @@ No, it does not, the scenario C has higher packet loss than B. Packet loss incre
 | Balanced | 2.5 | 2 | 68 | 64 | 8 |
 
 ### Question: Can two patterns have the same UL symbol count per period but provide different numbers of UL symbols per unit time? Explain using your two tables.
-Yes. Two TDD patterns can have the same number of UL symbols per repeating period but still provide different numbers of UL symbols per unit time.
-
-Both configurations have 32 configured UL symbols per period. However, the DL-heavy pattern repeats every 5 ms, while the Balanced pattern repeats every 2.5 ms. Therefore, over the same 5 ms interval, the DL-heavy configuration provides 32 UL symbols while the Balanced configuration provides 64 UL symbols.
+Yes, they can, so the two TDD patterns can have the same numbr of UL symbols in repeating period but provides different numbers of UL symbols in unit time and the both configurations have 32 configured UL symbols in the period, but the DL-heavy pattern repeats every 5 ms, while the balanced pattern repeats every 2.5 ms, so over the same 5 ms interval, the DL-heavy configuration only provides 32 UL symbols, while the Balanced configuration provides 64 UL symbols.
 
 4.5 Connect SIB1 to the Performance Results
 
@@ -175,61 +176,31 @@ Both configurations have 32 configured UL symbols per period. However, the DL-he
 
 #### 1. Which decoded TDD parameters differ between DL-heavy and Balanced?
 
-The main differences are the `dl-UL-TransmissionPeriodicity` and `nrofDownlinkSlots`.
-
-The DL-heavy configuration has a period of **5 ms** and **7 full downlink slots**, while the Balanced configuration has a period of **2.5 ms** and **2 full downlink slots**.
-
-The other decoded values are the same. Both configurations use **30 kHz** reference subcarrier spacing, **6 downlink symbols**, **2 uplink slots**, and **4 uplink symbols**.
+The differences are the `dl-UL-TransmissionPeriodicity` and `nrofDownlinkSlots` configurations. The DL-heavy configuration has a period of 5 ms and it has 7 full downlink slots and the balanced configuration has a period of 2.5 ms and 2 full downlink slots and the other decoded values are the same values. Both configurations use 30 kHz reference subcarrier spacing which is 6 downlink symbols, 2 uplink slots and 4 uplink symbols.
 
 #### 2. Which configuration provides more configured UL symbols per unit time?
 
-The **Balanced configuration** provides more configured UL symbols per unit time.
-
-Both configurations contain **32 UL symbols per repeating period**, but the Balanced pattern repeats every **2.5 ms**, while the DL-heavy pattern repeats every **5 ms**.
-
-Therefore, over the same 5 ms interval:
-
-- DL-heavy provides **32 UL symbols**.
-- Balanced provides **64 UL symbols**.
-
-The configured UL symbol share is approximately **22.86%** for DL-heavy and **45.71%** for Balanced.
+The balanced configuration provides more configured UL symbols per unit time. Both two configurations contains 32 UL symbols per repeating period, but the balanced configuration repeats every 2.5 ms and the DL-heavy pattern repeats every 5 ms, so balanced configuration makes more dymbols.
 
 #### 3. How does that difference help explain the B/C throughput comparison?
 
-Scenario B uses the DL-heavy configuration and achieves approximately **109.12 Mbps** uplink throughput.
-
-Scenario C uses the Balanced configuration and achieves approximately **124.42 Mbps** uplink throughput.
-
-The Balanced configuration provides more uplink transmission opportunities because it has a higher configured UL symbol share and twice as many configured UL symbols over the same 5 ms interval. This helps explain why Scenario C achieves higher uplink throughput than Scenario B.
-
-However, the TDD configuration is not necessarily the only reason for the throughput difference. Scheduling, radio conditions, protocol overhead, and other factors can also affect performance.
+The scenario B uses the DL-heavy configuration and achieves 109.12Mbps uplink throughput and the scenario C uses the balanced configuration with 124.42Mbps uplink throughput, so the Balanced configuration provides more uplink transmission opportunities because it has a higher number of configured UL symbols.
 
 #### 4. Why can A and B use the same SIB1 TDD configuration even though their traffic directions differ?
 
-Scenarios A and B can use the same SIB1 TDD configuration because the TDD pattern is a **cell configuration broadcast by the gNB**, while the traffic direction is determined by the iperf3 test.
+Scenarios A and B can use the same SIB1 TDD configuration, because the TDD pattern is cell configuration broadcast and it is by the gNB and the traffic direction is determined by the iperf3, so they can have the same configuration.
 
 ## 7. Task 5 — Is the TDD Setting Suitable?
 
 | Scenario | TDD setting | Traffic direction | Is the setting suitable for this direction? Why? |
 |---|---|---|---|
-| A | DL-heavy | Downlink | Yes. The DL-heavy configuration provides more downlink transmission opportunities, so it is suitable for downlink traffic. |
-| B | DL-heavy | Uplink | Less suitable. The DL-heavy configuration provides fewer uplink transmission opportunities, which can limit heavy uplink traffic. |
-| C | Balanced | Uplink | Yes, and it is more suitable for uplink traffic than Scenario B because it provides more configured UL resources. |
+| A | DL-heavy | Downlink | Yes, it is, becase the DL-heavy configuration provides more downlink transmission opportunities, so it is suitable for downlink. |
+| B | DL-heavy | Uplink | It is less suitable, because the DL-heavy configuration makes fewer uplink transmission opportunities, so this can limit heavy uplink. |
+| C | Balanced | Uplink | Yes, it is, it has more configured UL resources. |
 
 ### Question: Why might Scenario C achieve better uplink throughput than Scenario B?
 
-Scenario C uses the Balanced TDD configuration, while Scenario B uses the DL-heavy configuration.
-
-From the SIB1 analysis, the Balanced configuration has a configured UL symbol share of **45.71%**, while the DL-heavy configuration has only **22.86%**.
-
-Over the same 5 ms interval:
-
-- Scenario B's DL-heavy configuration provides **32 UL symbols**.
-- Scenario C's Balanced configuration provides **64 UL symbols**.
-
-Because Scenario C has more configured uplink transmission opportunities, the UE can send uplink data more frequently. This helps explain why Scenario C achieved approximately **124.42 Mbps** uplink throughput compared with approximately **109.12 Mbps** in Scenario B.
-
-However, the additional UL resources do not guarantee better performance in every metric. In this test, Scenario C also had higher packet loss and slightly higher jitter than Scenario B.
+So the scenario C uses the balanced TDD configuration and the scenario B uses the DL-heavy configuration. The balanced configuration has a configured UL symbol 45.71% and the DL-heavy configuration has 22.86%. So because the scenario C has more configured uplink transmission opportunities, the UE can send uplink data more frequently.
 
 ## 8. Task 6 — Find GTP-U Information
 
