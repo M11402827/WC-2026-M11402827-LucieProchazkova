@@ -153,9 +153,9 @@ So the Scenario C has higher throughput, higher packet loss and higher jitter. T
 
 ![TDD Time Allocation](images/TDD.png)<br>
 
-*Figure: DL-heavy,D = Downlink, U = Uplink, F = Flexible*
+*Figure: DL-heavy, D = Downlink, U = Uplink, F = Flexible*
 
-![TDD Time Allocation](images/TDD.png)<br>
+![TDD Time Allocation](images/TDD2.png)<br>
 
 *Figure: Balanced, D = Downlink, U = Uplink, F = Flexible*
 
@@ -220,8 +220,6 @@ So the scenario C uses the balanced TDD configuration and the scenario B uses th
 ![Scenario A DL Heavy Downlink Part 2](images/scenario2.png)<br>
 
 *Figure: Scenario A - DL Heavy Downlink Part 2*
-
-## 8. Task 6 — Find GTP-U Information
 
 | Item | Value |
 |---|---|
@@ -293,7 +291,6 @@ Packets 1892 and 1896:
 
 *Figure: Scenario A DL Heavy Downlink - Packet 1896 Interval*
 
-### Packet Interval
 
 | Scenario | Display filter | Packet numbers | Time interval |
 |---|---|---|---|
@@ -313,7 +310,7 @@ Because the scenario B uses the DL-heavy configuration and it has only 32 UL sym
 
 ### 3. How much does uplink throughput change from B to C?
 
-The scenario B achieves 109.12 Mbps and the scenario C achieves 124.42 Mbps. This is an increase change in about 15 Mbps.
+The scenario B achieves 109.12 Mbps and the scenario C achieves 124.42 Mbps. This is an increase change in about 15.3 Mbps.
 
 ### 4. What negative result, if any, is visible in C?
 
