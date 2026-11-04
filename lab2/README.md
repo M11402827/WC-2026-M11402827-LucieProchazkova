@@ -226,11 +226,9 @@ So the scenario C uses the balanced TDD configuration and the scenario B uses th
 
 ### Explanation
 
-The outer IP addresses, `192.168.70.129` and `192.168.70.134`, identify the endpoints of the GTP-U tunnel.
-
-The inner IP addresses, `10.0.0.6` and `192.168.70.135`, belong to the original user/application packet carried inside the tunnel.
-
-The TEID is `0x00000011` (17). It identifies the GTP-U tunnel at the receiving endpoint.
+The outer IP addresses: `192.168.70.129` and `192.168.70.134`. They identify the endpoints of the GTP-U tunel.
+The inner IP addresses: `10.0.0.6` and `192.168.70.135`. They belong to the original user packet inside the tunel.
+The TEID is `0x00000011` (17) and it identifies the GTP-U tunnel in the receiving endpoint.
 
 ## 9. Task 7 — TCP Retransmissions
 
@@ -242,9 +240,7 @@ The TEID is `0x00000011` (17). It identifies the GTP-U tunnel at the receiving e
 
 ### Question: Do these TCP retransmissions directly represent lost UDP performance packets?
 
-No. These retransmissions belong to TCP flows that Wireshark can decode, such as the iperf3 TCP control connection.
-
-The performance traffic in this lab is UDP, so these TCP retransmissions do not directly represent lost UDP performance packets. UDP packet loss should instead be taken from the iperf3 JSON results.
+No, they do not, because the performance traffic in this lab is UDP, so these TCP retransmissions do not directly represent lost UDP performance packets.
 
 ![Scenario A DL Heavy Downlink](images/packetsa.png)<br>
 
@@ -280,10 +276,6 @@ The performance traffic in this lab is UDP, so these TCP retransmissions do not 
 |---|---:|---:|
 | C | 121627 | 0.315 ms |
 
-The selected packet shows an ACK RTT of **315 microseconds**, which is equal to **0.315 ms**.
-
-This RTT value belongs to the iperf3 TCP control connection, not the UDP performance traffic.
-
 ### Packet Interval
 
 Packets 1892 and 1896:
@@ -298,31 +290,25 @@ Packets 1892 and 1896:
 |---|---|---|---|
 | A | `udp && ip.src == 192.168.70.135 && ip.dst == 10.0.0.6` | 1892 → 1896 | 1.045 ms |
 
-The packet interval was measured from packet 1896 using the Wireshark field `Time delta from previous displayed frame`.
-
-The measured interval between the two consecutive displayed UDP data packets is **1.045 ms**.
+The packet interval: `Time delta from previous displayed frame`, between the two consecutive data packets is 1.045 ms.
 
 ## 11. Final Guestions
 
 ### 1. Does Scenario A use a TDD setting that matches its traffic direction?
 
-Yes, because the ccenario A uses the DL-heavy TDD configuration and the traffic direction is downlink.
+Yes, it does, because the ccenario A uses the DL-heavy TDD configuration and it is downlink.
 
 ### 2. Why is Scenario B expected to have limited uplink resources?
 
-Because the scenario B uses the DL-heavy configuration and it has only 32 UL symbols in 5 ms, so less resources are configured for uplink.
+Because the scenario B uses the DL-heavy configuration and it has only 32 UL symbols in 5 ms so it has less resources are configured for uplink.
 
 ### 3. How much does uplink throughput change from B to C?
 
-Scenario B achieves approximately **109.12 Mbps**, while Scenario C achieves approximately **124.42 Mbps**.
-
-This is an increase of about **15.30 Mbps**, or approximately **14.02%**.
+The scenario B achieves 109.12 Mbps and the scenario C achieves 124.42 Mbps. This is an increase change in about 15 Mbps.
 
 ### 4. What negative result, if any, is visible in C?
 
-Scenario C has higher packet loss and slightly higher jitter than Scenario B.
-
-Packet loss increases from approximately **0.236%** in Scenario B to **2.134%** in Scenario C, while jitter increases from about **0.116 ms** to **0.162 ms**.
+Scenario C has higher packet loss and slightly higher jitter than Scenario B. Packet loss increases from approximately 0.236% in Scenario B to 2.134% in Scenario C, while jitter increases from about 0.116 ms to 0.162 ms.
 
 ### 5. Why can increasing UL resources improve uplink throughput?
 
