@@ -41,17 +41,20 @@ The traffic direction shown in the JSON match the scenario description.
 - Scenario B has `"reverse": 0`, which means uplink.
 - Scenario C has `"reverse": 0`, which means uplink.
 
-![Scenario A](images/profile1.png)
+
+![Scenario A](images/profile1.png)<br>
 
 *Figure: Scenario A*
 
-![Scenario B](images/profile2.png)
+![Scenario B](images/profile2.png)<br>
 
 *Figure: Scenario B*
 
-![Scenario C](images/profile3.png)
+
+![Scenario C](images/profile3.png)<br>
 
 *Figure: Scenario C*
+
 
 ## 4. Task 2 — Compare Throughput
 
