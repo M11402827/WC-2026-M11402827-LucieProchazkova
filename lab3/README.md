@@ -1,7 +1,7 @@
-# Wireless Communications Lab2
+# Wireless Communications Lab3
 ###### tags: `Wireless Communications`
 
-## :notebook_with_decorative_cover: Lab 2: gNB TDD Traffic Analysis
+## :notebook_with_decorative_cover: Lab 3: Deploying a 5G Standalone Network Using OpenAirInterface
 
 ## 1. Lab Overview
 
@@ -123,6 +123,94 @@ Use the OAI v2.4.0 Build Guide to prepare the environment before class. The expe
 
 ## 6. Task 4 — Investigate the Effect of Packet Size
 
+![Scenario A](images/small.png)<br>
+
+*Figure: Scenario A — Small Packets*
+
+![Scenario A](images/medium.png)<br>
+
+*Figure: Scenario B — Medium Packets*
+
+![Scenario A](images/big.png)<br>
+
+*Figure: Scenario C — Large Packets*
+
+| Scenario | ICMP Payload | Avg. RTT (ms) | Max. RTT (ms) | Packet Loss (%) |
+| -------- | -----------: | ------------: | ------------: | --------------: |
+| A        |     56 bytes |        22.018 |        27.833 |              0% |
+| B        |    512 bytes |        26.171 |        36.391 |              0% |
+| C        |   1200 bytes |        29.102 |        41.586 |              0% |
+
+### RTT Difference
+
+RTT Difference = Average RTT(C) - Average RTT(A) = 29.102 - 22.018  = 7.084 ms
+
+### Questions
+
+1. Which scenario has the highest average RTT?
+
+   Scenario C: the highest average RTT at 29.102 ms.
+
+2. Does increasing packet size always increase RTT in your measurements?
+
+   The average RTT increased as the ICMP payload size increased. The average RTT is 22.018 ms for 56-byte packets to 26.171 ms for 512-byte packets and then to 29.102 ms for 1200-byte packets. But also other system conditions can also affect latency so not always is the packet size increase RTT.
+
+3. Why might a larger packet require more transmission or processing resources?
+
+   Becasue larger packets contains more data and needs more resources to process and transport. They require more schedulings, encoding, decoding and memory.
+
+4. What factors other than packet size could affect RTT in a software-based 5G network?
+
+   For example the RTT can also be affected by CPU or sofware scheduling, system load, the docker container process, the load on the OAI gNB and UE processes.
+
+5. Can these results be interpreted as real over-the-air 5G latency? Explain.
+
+   No, they can not, because the results represent latency in an virtual OAI RFsimulator environment, but not in than a real 5G network. There are no real wireless behaviour which is interference, fading, path loss or delay.
+
+## 7. Task 5 — Diagnose a Controlled UE Registration Failure
+
+![Scenario A](images/wrongIMSI.png)<br>
+
+*Figure: Wrong IMSI UE*
+
+![Scenario A](images/correctIMSI.png)<br>
+
+*Figure: Corrected IMSI UE*
 
 
+| Item | Observation |
+|---|---|
+| Modified parameter | IMSI changed from `001010000000001` to `001010000000099` |
+| UE synchronized with gNB? | Yes |
+| RRC connection established? | Yes |
+| Registration successful? | No |
+| Error or rejection evidence | AMF received HTTP `404` from AUSF: `CONTEXT_NOT_FOUND`: `Resource corresponding to User imsi-001010000000099 not found`. The AMF then reported `Request Authentication Vectors failure` and sent a Registration Reject. |
+| Likely cause | The incorrect IMSI `001010000000099` was not provisioned in the 5G Core database. |
+
+### Questions
+
+1. Why can the UE potentially synchronize with the gNB even when the IMSI is incorrect?
+
+   Because thge UE synchronization and the initial radio connection occur before the 5G Core authenticates the user identity. The IMSI is used later in NAS Registration and authentication with the 5G Core.
+
+2. Which network function is involved in UE authentication?
+
+   The AUSF is involved in UE authentication, because the AMF sends the UE authentication request to the AUSF and it has the needed authentication information. SO in this task the AUSF did not find authentication information for IMSI `001010000000099` so it returned a `404 CONTEXT_NOT_FOUND` and later `Resource corresponding to User imsi-001010000000099 not found`.
+
+3. Why does changing an IMSI affect Registration but not the RFsimulator TCP connection itself?
+
+   Because thhe RFsimulator TCP connection only gives the simulated radio samples between the nrUE and gNB. It does not authenticate the UE subscriber identity.
+
+4. What evidence proves that restoring the correct configuration solved the problem?
+
+   After restoring the correct IMSI `001010000000001`, the UE is registered. The interface `oaitun_ue1` was recreated with IPv4 address `10.0.0.2/24` and ping test to the External DN `192.168.70.135` was successful:
+
+   - Packets transmitted: 5
+   - Packets received: 5
+   - Packet loss: 0%
+   - Minimum RTT: 15.957 ms
+   - Average RTT: 26.634 ms
+   - Maximum RTT: 36.564 ms
+
+## 8. Task 7 — Explain the Relationship Between Simulation and Real 5G
 
