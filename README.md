@@ -23,6 +23,13 @@
 - Goal: In this lab, you will compare three 5-second UDP iperf3 tests. You will learn how TDD slot allocation can affect downlink and uplink performance.
 - Delivery: [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab2/lab2)
 
+### LAB2 : gNB TDD Traffic Analysis
+
+- Assignment Information: Lab3
+- Deadline : 12:00, Nov. 16
+- Goal: In this lab, you will deploy your own 5G Standalone (SA) network using OpenAirInterface (OAI), verify the complete connection, investigate RFsimulator communication, perform active network measurements, and troubleshoot a controlled connection failure.
+- Delivery: [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab3/lab3)
+
 
 
 
