@@ -214,3 +214,67 @@ RTT Difference = Average RTT(C) - Average RTT(A) = 29.102 - 22.018  = 7.084 ms
 
 ## 8. Task 7 — Explain the Relationship Between Simulation and Real 5G
 
+| Feature | OAI RFsimulator | Physical 5G System |
+|---|---|---|
+| gNB and UE protocol stack | Present and functional | Present and functional |
+| OFDM signal processing | In software | In real radio hardware and software |
+| Physical antennas | Absent | Required |
+| RF hardware impairments | Absent | Present |
+| Wireless propagation effects | Absent | Present (path loss, fading, interference, noise) |
+| 5G Core connectivity | Present | Present |
+
+### Questions
+
+1. Which parts of the 5G system remain functional when physical RF hardware is replaced with RFsimulator?
+
+   The gNB and UE protocol remains functional (PHY, MAC, RLC, PDCP, RRC, NAS processing, synchronization, random access, RRC connection establishment, registration and PDU Session Establishment).
+
+2. Why is RFsimulator useful for testing the 5G protocol stack?
+
+   Because the RFsimulator allows the gNB and nrUE to communicate without requiring antennas or other physical RF equipment, because it is expensive. This makes it easier to test and debug software signaling procedures, protocol behavior, configuration changes or user plane connectivity.
+
+3. Why might latency and throughput differ between RFsimulator and a real 5G deployment?
+
+   Buecause RFsimulator does not include real world radio characteristics such as fading, interference, path loss, antenna characteristics or delays. So the measured latency and throughput can be differenct from a real over-the-air 5G network, because the perforance of RFsimulator is affected by CPU load, software process and Docker process.
+
+4. What would need to change if you wanted to test a physical UE instead of OAI nrUE?
+
+   So the RFsimulator need to be replaced by real world radio hardware, so the SDR connected to the gNB with antennas. The physical UE would also need a real world working SIM or USIM with real subscriber data. Also the parameters of the radio which is frequency or bandwidth must be configured for real world operation. Or we can implement the characteristics of the real world into the simulation such as (fading, path loss, interference, antenna characterstics), but it will still not be 100% accurate.
+
+## 9. Final Analysis
+
+1. Describe the complete process from starting the OAI 5GC to successful user-plane connectivity.
+
+   So at the beggining the OAI 5G Core started and all containers were healthy. The gNB in the secnond terminal makes NG Setup with the AMF and after the nrUE is connected to the gNB through RFsimulator and established an RRC connection. The UE then complete authentication and registration, which is followed by PDU Session, which assigned IPv4 address `10.0.0.2` and makes the `oaitun_ue1` interface. At the end we can use Ping replies from `192.168.70.135` to confirm user-plane connectivity.
+
+2. Explain the difference between an RFsimulator TCP connection and a 5G PDU Session.
+
+   So the RFsimulator TCP connection is a software used for simulate the transport mechanism between the OAI gNB and nrUE to send simulated radio sample data and can exist before the UE is successfully registered. A 5G PDU Session is a procedure that makes user plane connectivity for the UE and gives an IP path through the gNB,, and the PDU Session is established after the UE completes the required registration procedures.
+
+3. Based on your measurements, how did packet size affect RTT and packet loss?
+
+   The RTT increased as the ICMP payload size increased. The measured averages were `22.018 ms` for 56-byte packets, `26.171 ms` for 512-byte packets and `29.102 ms` for 1200-byte packets. Which is a difference of `7.084 ms` between the largest and smallest payloads. The packet loss remained at `0%` for all three scenarios, so increasing packet size affected delay in these measurements but did not cause packet loss.
+
+4. Describe the registration failure you introduced and explain how you diagnosed and recovered from it.
+
+   So the controlled failure was made by changing the UE IMSI from `001010000000001` to `001010000000099`. The UE could still synchronize with the gNB and establish an RRC connection, but Registration failed because of the incorrect IMSI. In the AMF/AUSF logs there was `CONTEXT_NOT_FOUND` and `Resource corresponding to User imsi-001010000000099 not found` and `Request Authentication Vectors failure` and Registration Reject. After restoring the correct IMSI, the UE registered, `oaitun_ue1` was created with `10.0.0.2`, and ping to `192.168.70.135` succeeded and `0%` packet loss.
+
+5. Identify two limitations of this simulated environment and explain how they might affect experimental results.
+
+   So one limitation is that RFsimulator does not have real wireless propagation effects such as fading, path loss, interference. So the radio performance mesured in the simulation may be different from a real 5G. A second limitation is that performance depends on software, CPU load, Docker function, so this can makke different latency, so it cannot be used as representative of real world 5G network.
+
+## 10. Submission Checklist
+
+Submit one Markdown or PDF report containing:
+
+- Completed 5G SA connection verification table.
+- gNB and nrUE connection screenshots.
+- RFsimulator TCP connection evidence.
+- Baseline Ping measurement.
+- Three packet-size comparison results.
+- RTT difference calculation.
+- Controlled failure and recovery evidence.
+- RFsimulator versus physical 5G comparison.
+- Answers to the final analysis questions.
+- All measurements and log evidence must come from your own experimental environment.
+
