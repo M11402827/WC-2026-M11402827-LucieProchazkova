@@ -16,14 +16,14 @@
 - Goal: In this lab, you will use learn how to do basic Wireshark operation, capture and analyze how a UE establishes an RRC connection with an OAI gNB and then registers with the 5G Core.
 - Delivery:  [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab0-1)
 
-### LAB2 : gNB TDD Traffic Analysis
+### LAB2: gNB TDD Traffic Analysis
 
 - Assignment Information: Lab2
 - Deadline : 12:00, Nov. 9
 - Goal: In this lab, you will compare three 5-second UDP iperf3 tests. You will learn how TDD slot allocation can affect downlink and uplink performance.
 - Delivery: [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab2/lab2)
 
-### LAB2 : gNB TDD Traffic Analysis
+### LAB3: Deploying a 5G Standalone Network Using OpenAirInterface
 
 - Assignment Information: Lab3
 - Deadline : 12:00, Nov. 16
