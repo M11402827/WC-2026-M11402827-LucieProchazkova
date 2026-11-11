@@ -63,3 +63,66 @@ Use the OAI v2.4.0 Build Guide to prepare the environment before class. The expe
 
 ## 4. Task 2 — Investigate RFsimulator Communication
 
+![Scenario A](images/tcp.png)<br>
+
+*Figure: TCP connection*
+
+| Item | Observed Value |
+|---|---|
+| gNB process ID | 13688 |
+| nrUE process ID | 18611 |
+| RFsimulator transport protocol | TCP |
+| RFsimulator port | 4043 |
+| TCP connection state | ESTABLISHED |
+| Connected process(es) | `nr-softmodem` and `nr-uesoftmodem` |
+
+### Questions
+
+1. Why does RFsimulator use a TCP connection instead of a physical antenna?
+
+   Instead of transmitting RF signals through real physical antenna, the virtual simulated radio samples are going through a virtual TCP connection. This allows the 5G radio protocol stack to be tested without physical RF hardware, because the real RF hardware is expensive.
+
+2. Are the TCP packets exchanged by RFsimulator the same as the UE's application-layer IP packets?
+
+   No, they are not. The RFsimulator TCP connection transport virtual simulated radio IQ sample data going to the nrUE and gNB.
+
+3. Does using RFsimulator mean that the UE and gNB are performing no physical layer processing? Explain.
+
+   No, it does not. The UE and gNB makes 5G NR physical layer processing: synchronization, OFDM, channel coding, modulation, scheduling.
+
+## 5. Task 3 — Verify End-to-End Connectivity
+
+![Scenario A](images/ping.png)<br>
+
+*Figure: Ping result*
+
+| Measurement | Observed Value |
+|---|---:|
+| UE IP address | 10.0.0.2 |
+| Destination IP | 192.168.70.135 |
+| Packets transmitted | 10 |
+| Packets received | 10 |
+| Packet loss (%) | 0% |
+| Minimum RTT (ms) | 23.340 |
+| Average RTT (ms) | 36.219 |
+| Maximum RTT (ms) | 75.759 |
+
+### Questions
+
+1. Why must Ping use the `oaitun_ue1` interface in this experiment?
+
+   Because `oaitun_ue1` interface is the UE's PDU Session and takes user plane traffic through the 5G network. Using the command `-I oaitun_ue1` tkes the ping packets to use the UE tunnel. This is to make sure that the connectivity test goes through the OAI 5G user plane.
+
+2. Does successful Registration guarantee successful user-plane connectivity?
+
+   No, it does not, because the registration writes that the UE has connected and authenticated with the 5G Core, but user plane communication still requires the PDU Session. The UE has to receive an IP address and the path mmust work between the gNB and UPF.
+
+3. What does a successful Ping prove, and what does it not prove about the simulated 5G system?
+
+   A successful Ping proves that IP packets can make it from the UE through the PDU Session to the external DN. All 10 packets were received with 0% packet loss, confirming user plane connection. It does not prove that the simulated system has the same radio performace or latency as a real 5G equpment. The real world is not ideal as the simulation is.
+
+## 6. Task 4 — Investigate the Effect of Packet Size
+
+
+
+
