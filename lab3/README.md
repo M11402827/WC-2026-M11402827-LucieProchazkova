@@ -185,7 +185,7 @@ RTT Difference = Average RTT(C) - Average RTT(A) = 29.102 - 22.018  = 7.084 ms
 | RRC connection established? | Yes |
 | Registration successful? | No |
 | Error or rejection evidence | AMF received HTTP `404` from AUSF: `CONTEXT_NOT_FOUND`: `Resource corresponding to User imsi-001010000000099 not found`. The AMF then reported `Request Authentication Vectors failure` and sent a Registration Reject. |
-| Likely cause | The incorrect IMSI `001010000000099` was not provisioned in the 5G Core database. |
+| Likely cause | The incorrect IMSI `001010000000099` |
 
 ### Questions
 
