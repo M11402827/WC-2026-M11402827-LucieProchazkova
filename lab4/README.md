@@ -174,8 +174,8 @@ The capture file was saved as: `lab4-f1-complete.pcap`.  The capture was opened 
 
 | Direction | Source | Destination | Packet Count | Example Packet | TEID |
 |---|---|---|---:|---:|---|
-| Uplink (DU → CU) | `127.0.0.4` | `127.0.0.3` | 27 | 42 | `0x38c0e6bd` |
-| Downlink (CU → DU) | `127.0.0.3` | `127.0.0.4` | 24 | 47 | `0xb0b76d76` |
+| Uplink (DU to CU) | `127.0.0.4` | `127.0.0.3` | 27 | 42 | `0x38c0e6bd` |
+| Downlink (CU to DU) | `127.0.0.3` | `127.0.0.4` | 24 | 47 | `0xb0b76d76` |
 
 ### Questions
 
@@ -203,7 +203,7 @@ The capture file was saved as: `lab4-f1-complete.pcap`.  The capture was opened 
 
 | Feature | Lab 3: Monolithic gNB | Lab 4: CU/DU Split |
 |---|---|---|
-| Number of RAN processes | 1 gNB process | 2 RAN processes: one gNB-CU and one gNB-DU |
+| Number of RAN processes | 1 gNB process | 2 RAN process: gNB-CU and gNB-DU |
 | Location of RRC/PDCP | In the monolithic gNB | in the CU |
 | Location of RLC/MAC/PHY | In the monolithic gNB | in the DU |
 | F1-C interface present? | No | Yes |
