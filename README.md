@@ -30,6 +30,12 @@
 - Goal: In this lab, you will deploy your own 5G Standalone (SA) network using OpenAirInterface (OAI), verify the complete connection, investigate RFsimulator communication, perform active network measurements, and troubleshoot a controlled connection failure.
 - Delivery: [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab3/lab3)
 
+### Lab 4 — 5G CU/DU Split Deployment and F1-C/F1-U Analysis
+
+- Assignment Information: Lab4
+- Deadline : 12:00, Nov. 23
+- Goal: The goal of this lab is to deploy a split 5G gNB architecture using separate CU and DU components, analyze F1-C and F1-U communication between them and verify that the UE can still complete registration, establish a PDU session and achieve end-to-end user-plane connectivity.
+- Delivery: [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab4/lab4)
 
 
 
