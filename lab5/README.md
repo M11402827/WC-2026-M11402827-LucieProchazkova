@@ -66,8 +66,50 @@ If Wireshark shows only UDP packets or the nr-rrc filter does not work, complete
 
 Add a brief explanation below every screenshot. You do not need to draw boxes or arrows on screenshots.
 
-## Task 1: From Cell Search to Msg2 RAR
+## Task 1: From Cell Search to Msg2 RAR - 35 points
 
-![Split configurations](images/file_exist.png)<br>
+### Step 1: Find Cell Search and Initial Synchronization — 8 points
 
-*Figure: Split configurations*
+Run the following command on Lab5-ue.log:
+
+grep -nE 'Starting cell search|Initial sync successful' lab5-artifacts/Lab5-ue.log
+Record whether UE synchronization succeeded and the PCI value. Explain: after completing initial synchronization, what is the UE able to do?
+
+![Cell search](images/cell_search.png)<br>
+
+*Figure: Cell search*
+
+This observation shows that:
+
+- UE synchronization succeeded: Yes
+- PCI: 0
+- Cell search log line: 56
+- Initial synchronization success log line: 63
+
+The UE completed initial synchronization with the NR cell (Initial sync successful), PCI: 0. After synchronization, the UE is aligned with the gNB in time and frequency and knows the physical cell identity.
+
+### Step 2: Find MIB and SIB1 — 8 points
+
+![MIB and SIB1](images/mib.png)<br>
+
+*Figure: MIB and SIB1*
+
+The SIB1 is frame number 1. The MIB is frame number 2.
+
+It shows that both MIB and SIB1 are repeatedly and separately broadcasted by the gNB and the MIB provides basic cell information needed for the UE to continue decoding the cell and the SIB1 gives common system information and access configuration.
+
+### Step 3: Find Msg1 PRACH — 8 points
+
+![Msg1 PRACH](images/prach.png)<br>
+
+*Figure: Msg1 PRACH*
+
+- frame.slot: `553.19`
+- preambleIndex: `16`
+
+The PRACH transmission is the Msg1 of the 4 step random access taskk. The UE transmitted PRACH at frame.slot `553.19` using preamble index `16`. This is the PRACH preamble and it is the UE's initial random access transmission to gNB.
+
+![RACH Preamble chosen](images/rapid.png)<br>
+
+*Figure: RACH Preamble chosen*
+
