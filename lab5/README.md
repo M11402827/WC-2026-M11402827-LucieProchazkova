@@ -167,7 +167,7 @@ No, I can not, because the RRCSetupRequest is only the UE request to make a RRC 
 
 ### Step 2: Find RRCSetup — 10 points
 
-![RRCSetup](images/rrc_setup.png)<br>
+![RRCSetup](images/rcc_setup.png)<br>
 
 *Figure: RRCSetup*
 
@@ -217,7 +217,7 @@ Yes, it does, because both the `RRCSetup` and `RRCSetupComplete` are using `rrc-
 
 ### Step 4: Confirm the Final Random Access and RRC Connection Result — 8 points
 
-![Final Random Access and RRC Connection Result](images/final.png)<br>
+![Final Random Access and RRC Connection Result](images/final_random.png)<br>
 
 *Figure: Final Random Access and RRC Connection Result*
 
@@ -241,6 +241,12 @@ Thefirst thing UE reports `4-Step RA procedure succeeded` at line 87, which is m
 - What do 4-Step RA procedure succeeded and State = NR_RRC_CONNECTED each prove?
 
 The 4-Step RA procedure succeeded proves that the random access procedure, completed successfully. The State = NR_RRC_CONNECTED proves that the UE has progressed into the RRC connected state after receiving and processing the RRCSetup request. Thesse two messages confirm two different stages: successful radio access first and then successful RRC connection establishment.
+
+## Task 3: Draw an Initial Access MSC Diagram — 25 points
+
+Using the log and Wireshark evidence found in Tasks 1 and 2, draw your own Message Sequence Chart (MSC). It must include two vertical lifelines, UE and gNB, and the following six messages: MIB/SIB1, Msg1, Msg2, Msg3, Msg4, and RRCSetupComplete.
+
+Determine and draw the correct order and direction of the messages yourself. Add a one-sentence purpose next to each arrow.
 
 
 
