@@ -127,7 +127,7 @@ The UE log shows the PRACH transmission at frame.slot `553.19` with `preambleInd
 
 3. Does the Wireshark `RAPID` match the UE-log `preambleIndex`? What does this show?
 
-Yes, it does. Wireshark also shows `RAPID = 16`, which is the sae as the UE-log `preambleIndex = 16`. This means that the PRACH preamble transmitted by the UE is the same random access preamble seen by the gNB.
+Yes, it does. It shows that in Wireshark also shows `RAPID = 16`, which is the same as the UE-log `preambleIndex = 16`. This means that the PRACH preamble transmitted by the UE is the same random access preamble seen by the gNB.
 
 ### Step 4: Find Msg2 RAR in Wireshark — 11 points
 
@@ -142,4 +142,107 @@ Yes, it does. Wireshark also shows `RAPID = 16`, which is the sae as the UE-log 
 
 This packet is Msg2, which is the Random Access Response (RAR) in the 4 step random access procedure. The gNB responds to the PRACH preamble of the UE and gives the UE with temporary C-RNTI.
 
+## Task 2: Complete Random Access and RRC Connection Setup — 40 points
 
+Complete the following steps in order. For each message, provide a screenshot and record the requested frame number, fields, and brief explanation.
+
+### Step 1: Find RRCSetupRequest — 10 points
+
+![RRCSetupRequest](images/rrc.png)<br>
+
+*Figure: RRCSetupRequest*
+
+Frame number = `491`
+Context RNTI = `61982`
+
+Briefly answer:
+
+- Does the Context RNTI match the Temporary C-RNTI in the Task 1 / Step 4 RAR? What does this show?
+
+Yes, it does. It shows the context RNTI is `61982`, which is matches the temporary C-RNTI `61982` , which is assigned in the Msg2 RAR. This shows that the the RRCSetupRequest is connected with the same UE that received the RAR and that the temporary UE identity is being used for the access procedure.
+
+- Can you claim that the RRC connection has been established after seeing only RRCSetupRequest? Why or why not?
+
+No, I can not, because the RRCSetupRequest is only the UE request to make a RRC connection. The gNB must still send `RRCSetup` and the UE must then respond with `RRCSetupComplete`.
+
+### Step 2: Find RRCSetup — 10 points
+
+![RRCSetup](images/rrc_setup.png)<br>
+
+*Figure: RRCSetup*
+
+Frame number = `492`
+Context RNTI = `61982`
+rrc-TransactionIdentifier = `1`
+Check whether Contention Resolution also appears in the packet. Yes, it appear.
+
+Below the screenshot, briefly answer:
+
+- Which message is this in four-step Random Access?
+
+This downlink transmission corresponds to `Msg4`, it has the contention resolution information and the `RRCSetup` message from the gNB to the UE.
+
+- What does it mean that Contention Resolution and RRCSetup appear in the same downlink message?
+
+It means that the gNB resolves the random access contention it provides the UE with the RRC configuration needed to continue connection establishment. The UE can confirm that the access attempt was accepted and proceed to completing the RRC connection.
+
+### Step 3: Find RRCSetupComplete — 12 points
+
+
+![RRCSetupComplete](images/element.png)<br>
+
+*Figure: RRCSetupComplete*
+
+Select the packet and first verify that MAC-NR UL-SCH appears at the top. Expand:
+
+RLC-NR → PDCP-NR → NR Radio Resource Control (RRC) protocol
+  → UL-DCCH-Message → message: c1
+Expand message: c1 further and confirm that it contains rrcSetupComplete. Record:
+
+Frame number = `498`
+Context RNTI = `61982`
+rrc-TransactionIdentifier = `1`
+
+It contains the rrcSetupComplete.
+
+Below the screenshot, briefly answer:
+
+- Does the Context RNTI still match the Temporary C-RNTI in the RAR?
+
+Yes, it does. The context of RNTI is `61982`, which is the same as the Temporary C-RNTI assigned in the Msg2 RAR previously, so this confirms that the same UE context continues through the random access.
+
+- Does the rrc-TransactionIdentifier match the RRCSetup in Step 2? What is the purpose of this comparison?
+
+Yes, it does, because both the `RRCSetup` and `RRCSetupComplete` are using `rrc-TransactionIdentifier = 1`, so matching the transaction identifier shows that the RRCSetupComplete is the UE response to the specific RRCSetup transaction sent by the gNB.
+
+### Step 4: Confirm the Final Random Access and RRC Connection Result — 8 points
+
+![Final Random Access and RRC Connection Result](images/final.png)<br>
+
+*Figure: Final Random Access and RRC Connection Result*
+
+Run the following command on the UE log:
+
+grep -nE '4-Step RA procedure succeeded|Received NR_RRCSetup|RRCSetupComplete|State = NR_RRC_CONNECTED' \
+  lab5-artifacts/Lab5-ue.log
+
+From the output, record:
+
+4-Step RA procedure succeeded: line `87`
+Received NR_RRCSetup: line `88`
+State = NR_RRC_CONNECTED: line `90`
+Generating RRCSetupComplete: line `93`
+Submit a screenshot of this log output and briefly answer:
+
+- In log order, what are the three events from successful Random Access to generating RRCSetupComplete?
+
+Thefirst thing UE reports `4-Step RA procedure succeeded` at line 87, which is meaning the contention based random access procedure completed successfully. As a second thing the UE receives `NR_RRCSetup` at line 88 and enters `NR_RRC_CONNECTED` state at line 90. As third thing the UE generates `RRCSetupComplete` at line 93.
+
+- What do 4-Step RA procedure succeeded and State = NR_RRC_CONNECTED each prove?
+
+The 4-Step RA procedure succeeded proves that the random access procedure, completed successfully. The State = NR_RRC_CONNECTED proves that the UE has progressed into the RRC connected state after receiving and processing the RRCSetup request. Thesse two messages confirm two different stages: successful radio access first and then successful RRC connection establishment.
+
+
+
+
+   
