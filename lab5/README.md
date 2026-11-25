@@ -248,6 +248,10 @@ Using the log and Wireshark evidence found in Tasks 1 and 2, draw your own Messa
 
 Determine and draw the correct order and direction of the messages yourself. Add a one-sentence purpose next to each arrow.
 
+![MSC Diagram](images/diagram.png)<br>
+
+*Figure: Initial Access MSC Diagrame*
+
 
 
 
