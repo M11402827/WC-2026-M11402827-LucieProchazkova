@@ -37,6 +37,13 @@
 - Goal: The goal of this lab is to deploy a split 5G gNB architecture using separate CU and DU components, analyze F1-C and F1-U communication between them and verify that the UE can still complete registration, establish a PDU session and achieve end-to-end user-plane connectivity.
 - Delivery: [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab4/lab4)
 
+### LAB5: From Initial Access to RRC Connection Setup
+
+- Assignment Information: Lab5
+- Deadline : 12:00, Nov. 30
+- Goal: Trace a successful NR Initial Access procedure from cell search to RRC_CONNECTED. Use UE logs and Wireshark MAC-NR PCAP to identify MIB/SIB1, 4-step Random Access, and RRC setup messages. Reconstruct the UE–gNB message sequence and distinguish RAN access from 5GC registration.
+- Delivery: [Link text](https://github.com/M11402827/WC-2026-M11402827-LucieProchazkova/tree/lab5/lab5)
+
 
 
 
