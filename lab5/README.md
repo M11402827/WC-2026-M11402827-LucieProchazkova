@@ -104,12 +104,42 @@ It shows that both MIB and SIB1 are repeatedly and separately broadcasted by the
 
 *Figure: Msg1 PRACH*
 
-- frame.slot: `553.19`
-- preambleIndex: `16`
+- frame.slot = `553.19`
+- preambleIndex = `16`
 
 The PRACH transmission is the Msg1 of the 4 step random access taskk. The UE transmitted PRACH at frame.slot `553.19` using preamble index `16`. This is the PRACH preamble and it is the UE's initial random access transmission to gNB.
 
 ![RACH Preamble chosen](images/rapid.png)<br>
 
 *Figure: RACH Preamble chosen*
+
+- RAPID = `16`
+
+This UE log shows that the PRACH was transmitted at frame.slot `553.19` using preamble index `16`.
+
+1. Which Random Access message is this PRACH transmission?
+
+This PRACH transmission is Msg1 of the 4 step random access procedure.
+
+2. At which `frame.slot` and with which `preambleIndex` does the UE log show transmission?
+
+The UE log shows the PRACH transmission at frame.slot `553.19` with `preambleIndex = 16`.
+
+3. Does the Wireshark `RAPID` match the UE-log `preambleIndex`? What does this show?
+
+Yes, it does. Wireshark also shows `RAPID = 16`, which is the sae as the UE-log `preambleIndex = 16`. This means that the PRACH preamble transmitted by the UE is the same random access preamble seen by the gNB.
+
+### Step 4: Find Msg2 RAR in Wireshark — 11 points
+
+![Msg2 RAR](images/rnti.png)<br>
+
+*Figure: Msg2 RAR*
+
+
+- RAPID = `16`
+- Temporary C-RNTI = `61982`
+- Frame number = `490`
+
+This packet is Msg2, which is the Random Access Response (RAR) in the 4 step random access procedure. The gNB responds to the PRACH preamble of the UE and gives the UE with temporary C-RNTI.
+
 
