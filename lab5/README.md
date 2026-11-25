@@ -104,6 +104,7 @@ It shows that both MIB and SIB1 are repeatedly and separately broadcasted by the
 
 *Figure: Msg1 PRACH*
 
+- Msg1 PRACH log line number = `81`
 - frame.slot = `553.19`
 - preambleIndex = `16`
 
